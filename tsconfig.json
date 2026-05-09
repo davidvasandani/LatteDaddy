@@ -1,0 +1,1 @@
+{\n  \"extends\": \"expo/tsconfig.base\",\n  \"compilerOptions\": {\n    \"strict\": true\n  }\n}
