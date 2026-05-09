@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { UserPreference } from '../types';
 
 interface PersonalizationFiltersProps {
@@ -14,52 +14,65 @@ export const PersonalizationFilters: React.FC<PersonalizationFiltersProps> = ({
   onTogglePreference,
 }) => {
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.container}>
-      {CATEGORIES.map((category) => (
-        <TouchableOpacity
-          key={category}
-          style={[
-            styles.chip,
-            selectedPreferences.includes(category) && styles.selectedChip,
-          ]}
-          onPress={() => onTogglePreference(category)}
-        >
-          <Text
-            style={[
-              styles.chipText,
-              selectedPreferences.includes(category) && styles.selectedChipText,
-            ]}
-          >
-            {category}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.label}>Filter by interests:</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+        {CATEGORIES.map((category) => {
+          const isSelected = selectedPreferences.includes(category);
+          return (
+            <TouchableOpacity
+              key={category}
+              style={[styles.chip, isSelected && styles.selectedChip]}
+              onPress={() => onTogglePreference(category)}
+            >
+              <Text style={[styles.chipText, isSelected && styles.selectedChipText]}>
+                {category}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
     paddingVertical: 12,
-    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  label: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#999',
+    textTransform: 'uppercase',
+    paddingHorizontal: 16,
+    marginBottom: 8,
+  },
+  scrollContent: {
+    paddingHorizontal: 12,
   },
   chip: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#eee',
-    marginRight: 8,
+    backgroundColor: '#F0F0F0',
+    marginHorizontal: 4,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
   selectedChip: {
     backgroundColor: '#D2691E',
+    borderColor: '#D2691E',
   },
   chipText: {
     fontSize: 14,
     color: '#333',
+    fontWeight: '500',
   },
   selectedChipText: {
     color: '#fff',
-    fontWeight: '600',
   },
 });
