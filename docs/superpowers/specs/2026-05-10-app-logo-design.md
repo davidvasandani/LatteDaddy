@@ -42,6 +42,14 @@ Restore the following keys (stripped during the initial build fix):
   "resizeMode": "contain",
   "backgroundColor": "#D88B3D"
 },
+"ios": {
+  "supportsTablet": true,
+  "bundleIdentifier": "me.vasandani.lattedaddy",
+  "icon": "./assets/icon.png",
+  "infoPlist": {
+    "ITSAppUsesNonExemptEncryption": false
+  }
+},
 "android": {
   "adaptiveIcon": {
     "foregroundImage": "./assets/adaptive-icon.png",
@@ -50,6 +58,8 @@ Restore the following keys (stripped during the initial build fix):
   "package": "me.vasandani.lattedaddy"
 }
 ```
+
+The explicit `ios.icon` ensures Expo embeds the icon into the iOS asset catalog at build time (rather than relying on the top-level fallback). This is the field that becomes the actual app icon on the home screen, in Settings, and in TestFlight.
 
 Splash `backgroundColor` is `#D88B3D` — the gradient midpoint — so the splash fills cleanly until the mark loads.
 
