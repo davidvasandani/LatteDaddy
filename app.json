@@ -4,16 +4,27 @@
     "slug": "lattedaddy",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#D88B3D"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "me.vasandani.lattedaddy",
+      "icon": "./assets/icon.png",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#D2691E"
+      },
       "package": "me.vasandani.lattedaddy"
     },
     "extra": {
