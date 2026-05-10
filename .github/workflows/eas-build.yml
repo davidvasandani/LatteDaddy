@@ -1,1 +1,27 @@
-name: EAS Build and Submit\non:\n  push:\n    branches:\n      - main\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: 18\n      - name: Install dependencies\n        run: npm install\n      - name: Setup EAS CLI\n        run: npm install -g eas-cli\n      - name: Build and Submit to App Store\n        run: |\n          eas build --platform ios --profile production --non-interactive\n          eas submit --platform ios --profile production --non-interactive --latest\n        env:\n          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+name: EAS Build and Submit
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Setup EAS CLI
+        run: npm install -g eas-cli
+      - name: Build iOS
+        run: eas build --platform ios --profile production --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Submit to TestFlight
+        run: eas submit --platform ios --profile production --non-interactive --latest
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
