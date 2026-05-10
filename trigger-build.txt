@@ -1,1 +1,2 @@
 Triggering new build with App Store Connect API Key linked.
+Pipeline test 2026-05-10 — verify build+submit end-to-end.
